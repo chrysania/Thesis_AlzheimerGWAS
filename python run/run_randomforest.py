@@ -31,37 +31,21 @@ gwas_logreg_diagnosis.show(5)
 
 
 # Random Forest
-mt_rf = mt
-
-covariates = [mt_rf.labels.Age, mt_rf.labels.APOE]
-rf_model = vshl.random_forest_model(y=mt_rf.labels.Diagnosis,
-                    x=mt_rf.GT.n_alt_alleles(),
-                    covariates=covariates, 
+rf_model = vshl.random_forest_model(y=mt.labels.Diagnosis,
+                    x=mt.GT.n_alt_alleles(), 
+                    covariates={'age':mt.labels.Age, 'APOE':mt.labels.APOE},
                     seed=13, mtry_fraction=0.05,
                     min_node_size=5, max_depth=10, imputation_type="mode")
 rf_model.fit_trees(500, 100)
 
 # Capture variant importances
-print(rf_model.oob_error())
 impTable = rf_model.variable_importance()
-impTable.show(5)
+impTablePD = impTable.to_pandas()
+filepath = Path('out1.csv')
+impTablePD.to_csv(filepath)
 
 # Show the covariates importances
 covImpTable = rf_model.covariate_importance()
-covImpTable.show(5)
-
-# Manhattan plot
-import varspark.hail.plot as vshlplt
-
-p = vshlplt.manhattan_imp(gwas_with_imp.importance, 
-                             hover_fields=dict(ri=gwas_with_imp.rsid),
-                             significance_line = None)
-show(p)
-
-# Compare logistc regression values vs. rf importance
-p2 = hl.plot.scatter(x=-hl.log10(gwas_with_imp.p_value),
-                    y=gwas_with_imp.importance, 
-                    xlabel = '-log10(p-value)',
-                    ylabel = 'gini importance',
-                    hover_fields=dict(rs=gwas_with_imp.rsid, loc=gwas_with_imp.locus))
-show(p2)
+covTablePD = covImpTable.to_pandas()
+filepath = Path('out2.csv')
+covTablePD.to_csv(filepath)
