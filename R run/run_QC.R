@@ -2,7 +2,7 @@
 # R file 1 of 5: Data set up & Quality control
 # status: completed
 
-setwd("C:/Users/chrys/Desktop/plink19")
+setwd("/plink1.9")
 
 ##### Data set up #####
 
