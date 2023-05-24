@@ -2,7 +2,7 @@
 # R file 3 of 5: Simple Association
 # status: completed
 
-setwd("plink1.9/")
+setwd("/plink1.9")
 library(dplyr)
 
 ##### Simple association #####
