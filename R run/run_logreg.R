@@ -2,7 +2,7 @@
 # R file 4 of 5: Logistic Regression
 # status: completed
 
-setwd("C:/Users/chrys/Desktop/plink19")
+setwd("plink1.9/")
 library(dplyr)
 
 ##### Logistic regression #####
