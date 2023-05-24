@@ -2,7 +2,7 @@
 # R file 2 of 5: PCA & Visualization
 # status: completed
 
-setwd("plink1.9/")
+setwd("./plink1.9")
 library(tidyverse)
 library(ggplot2)
 library(magrittr)
