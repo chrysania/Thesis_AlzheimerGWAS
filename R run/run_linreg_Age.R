@@ -2,7 +2,7 @@
 # R file 5a of 5: Linear Regression APOE
 # status: completed
 
-setwd("plink1.9/")
+setwd("./plink1.9")
 library(dplyr)
 
 ##### Linear regression #####
